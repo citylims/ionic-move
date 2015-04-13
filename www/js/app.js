@@ -1,4 +1,6 @@
-.controller('AppCtrl', function($scope) {
+angular.module('starter', ['ionic'])
+
+.controller('AppCtrl', function($scope, $timeout) {
     $scope.moveButtons = function() {
         var buttons = document.getElementById('buttons');
 
@@ -22,7 +24,7 @@
     		.end();
     	});
     };
-     
+
     $scope.blink = function() {
     	var bg = document.getElementById('contentBG');
 
@@ -36,5 +38,35 @@
     	.duration('0.2s')
     	.then(highlightBack)
     	.end();
+    };
+
+    $scope.timer = function() {
+    	if($scope.timerTimeout) {
+    		$timeout.cancel($scope.timerTimeout);
+    	}
+    	$scope.time = 0;
+    	$scope.timerTimeout = $timeout(onTimerTimeout,0);
+    };
+
+    function onTimerTimeout(){
+    	$scope.time++;
+    	var timer = document.getElementById('myTimer');
+
+    	move(timer)
+    	.ease('snap')
+    	.set('opacity', 1)
+    	.scale(1.4)
+    	.duration('0s')
+    	.end();
+
+    	move(timer)
+    	.ease('out')
+    	.x(150)
+    	.rotate(140)
+    	.scale(.1)
+    	.set('opacity', 0)
+    	.duration('1s')
+    	.end();
+    	$scope.timerTimeout = $timeout(onTimerTimeout,1000);
     };
 });
