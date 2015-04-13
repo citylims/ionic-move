@@ -34,7 +34,7 @@ angular.module('starter', ['ionic'])
     	.end();
 
     	var highlight = move(bg)
-    	.set('background', '#B9F6CA')
+    	.set('background', '#25cecd')
     	.duration('0.2s')
     	.then(highlightBack)
     	.end();
